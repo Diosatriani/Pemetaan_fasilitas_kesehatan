@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">Go_FKES</string>
+
+    <string name="map_type_none">None</string>
+    <string name="map_type_normal">Normal</string>
+    <string name="map_type_terrain">Terrain</string>
+    <string name="map_type_satelite">Satelite</string>
+    <string name="map_type_hybrid">Hybrid</string>
+    <string name="paragraf_tentang1">Kota Ungaran adalah ibu kota Kabupaten Semarang, Provinsi Jawa Tengah, Indonesia. Kota ini terletak tepat di sebelah selatan Kota Semarang. Wilayah perkotaan Ungaran meliputi kecamatan Ungaran Barat dan Ungaran Timur.  Ungaran termasuk jalur utama yang sering dilewati kendaraan-kendaraan besar oleh karena itu di daerah tersebut setiap lebaran atau saat pada saat arus mudik sering di sediakan rest area di daerah tersebut.</string>
+    <string name="paragraf2_tentang1">GO_FKES merupakan aplikasi yang membantu penggunanya untuk mempercepat pertolongan dari fasilitas kesehatan yang berada di daerah ungaran.</string>
+    <string name="tujuan_about">Tujuan nya dibuat aplikasi ini supaya mempermudah penggunanya untuk menemukan fasilitas kesehatan yang berada didaerah kabupaten semarang di wilayah ungaran khususnya.</string>
+
+    <string name="go_to_permissions_settings">Go to App settings and enable permissions</string>
+    <string name="permission_dialog">Accessing Location Permissions required</string>
+</resources>

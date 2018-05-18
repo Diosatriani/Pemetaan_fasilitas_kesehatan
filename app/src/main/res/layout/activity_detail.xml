@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".Activity.DetailActivity">
+
+    <android.support.v7.widget.Toolbar
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/tabs_detail"
+        android:background="@color/colorPrimary">
+
+    </android.support.v7.widget.Toolbar>
+
+    <LinearLayout
+        android:layout_marginLeft="3dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+
+        <TextView
+            android:id="@+id/idt"
+            android:layout_width="wrap_content"
+            android:layout_height="1dp"
+            android:textStyle="bold" />
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="match_parent"
+            android:layout_height="320dp"
+            android:layout_marginBottom="2dp"/>
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="0dp" />
+
+        <TextView
+            android:id="@+id/namat"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="nama"
+            android:textColor="#000"
+            android:textSize="23dp"
+            android:textStyle="bold" />
+
+
+        <!--<ImageView-->
+        <!--android:background="@drawable/fkesnew1"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:textColor="@color/dark"-->
+        <!--android:textSize="22dp" />-->
+
+        <TextView
+            android:layout_marginTop="5sp"
+            android:layout_marginBottom="3sp"
+            android:layout_marginLeft="10sp"
+            android:id="@+id/jenist"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:lineSpacingExtra="3sp"
+            android:text="jenis"
+            android:textColor="#000"
+            android:textSize="22sp"/>
+
+        <Button
+            android:layout_marginLeft="10sp"
+            android:id="@+id/btn_call"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="Call"
+            android:textSize="16sp"/>
+
+        <TextView
+            android:gravity="center"
+            android:id="@+id/lngt"
+            android:textSize="26sp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:textStyle="italic|bold"
+            android:textColor="#000"
+            android:text="Informasi Publik" />
+
+    </LinearLayout>
+
+
+</LinearLayout>
