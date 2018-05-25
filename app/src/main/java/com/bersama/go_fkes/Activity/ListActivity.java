@@ -140,7 +140,7 @@ public class ListActivity extends AppCompatActivity {
     public void functionToRun() {
 
         Intent callIntent = new Intent(Intent.ACTION_CALL);
-        callIntent.setData(Uri.parse("notelp"));
+        callIntent.setData(Uri.parse("tel:"+notelp));
 
         if (ActivityCompat.checkSelfPermission(ListActivity.this,
                 Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {

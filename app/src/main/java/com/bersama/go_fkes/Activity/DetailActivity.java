@@ -75,8 +75,7 @@ public class DetailActivity extends AppCompatActivity {
             @Override
             public void onClick(View arg0) {
                 Intent callIntent = new Intent(Intent.ACTION_CALL);
-                callIntent.setData(Uri.parse("tel :" +notelp));
-                Log.d("","noooob: "+notelp);
+                callIntent.setData(Uri.parse("tel:"+notelp));
 
                 if (ActivityCompat.checkSelfPermission(DetailActivity.this,
                         Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {

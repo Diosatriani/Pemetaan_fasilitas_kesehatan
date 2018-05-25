@@ -11,9 +11,9 @@
     <application
         android:name=".AppController.AppController"
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/fks"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@drawable/fks"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".MainActivity" />
@@ -25,26 +25,18 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Splash.Splahs2Activity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+        <activity android:name=".Splash.Splahs2Activity"/>
         <activity android:name=".Activity.MapsActivity" />
-
+        <activity android:name=".Activity.AboutActivity" />
+        <activity android:name=".Activity.DetailActivity" />
+        <activity android:name=".Activity.DetailListActivity" />
+        <activity android:name=".Helper.SplashPermissionActivity"></activity>
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyADOfHO-dmfob_-a1OWQ5GalnmOalFRNk0" />
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
-
-        <activity android:name=".Activity.AboutActivity" />
-        <activity android:name=".Activity.DetailActivity" />
-        <activity android:name=".Activity.DetailListActivity" />
-        <activity android:name=".Helper.SplashPermissionActivity"></activity>
     </application>
 
 </manifest>

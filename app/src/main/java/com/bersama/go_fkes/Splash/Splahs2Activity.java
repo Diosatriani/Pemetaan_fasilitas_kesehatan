@@ -7,6 +7,7 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 
+import com.bersama.go_fkes.Helper.SplashPermissionActivity;
 import com.bersama.go_fkes.MainActivity;
 import com.bersama.go_fkes.R;
 
@@ -21,7 +22,7 @@ public class Splahs2Activity extends AppCompatActivity {
         iv = (ImageView) findViewById(R.id.iv);
         Animation myanim = new AnimationUtils().loadAnimation(this,R.anim.mytransitions);
         iv.startAnimation(myanim);
-        final Intent i = new Intent(this, MainActivity.class);
+        final Intent i = new Intent(this, SplashPermissionActivity.class);
         Thread timer = new Thread(){
             public void run(){
                 try{
