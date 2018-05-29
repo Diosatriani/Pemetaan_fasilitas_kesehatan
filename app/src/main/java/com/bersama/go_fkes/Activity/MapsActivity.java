@@ -59,25 +59,27 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private MarkerOptions markerOptions = new MarkerOptions();
     private CameraPosition cameraPosition;
     private LatLng center, latLng;
-    private String title;
+    private String title,jenis,alamat;
     private String description;
     private String image;
-    private String jenis;
+//    private String jenis;
     private EditText etSearch;
     private Button btnSearch;
     private GoogleMap mMap;
     private String notelp;
+//    private String alamat;
 
     public static final String ID = "id";
     public static final String TITLE = "nama";
     public static final String LAT = "lat";
     public static final String LNG = "lng";
-    public static final String DESCRIPTION = "alamat";
+    public static final String ALAMAT = "alamat";
     public static final String JENIS = "jenis";
     public static final String IMAGE = "image";
 
     String tag_json_obj = "json_obj_req";
     private Toolbar mActionToolbar;
+
 
 
     @Override
@@ -231,18 +233,14 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             @Override
             public void onInfoWindowClick(Marker marker) {
                 Toast.makeText(getApplicationContext(), marker.getTitle(), Toast.LENGTH_SHORT).show();
-//                Toast.makeText(getApplicationContext(), marker.getSnippet(), Toast.LENGTH_SHORT).show();
-                Toast.makeText(MapsActivity.this, ""+description, Toast.LENGTH_SHORT).show();
-//                Double lat = marker.getPosition().latitude;
-//                Double lng = marker.getPosition().longitude;
-//                String notelp= marker.getClass().getName();
+
 
 
 
                 Intent intent = new Intent(MapsActivity.this, DetailActivity.class);
 //                intent.putExtra(image1, marker.getSnippet());
                 intent.putExtra("TAG_NAMA_DEALER", marker.getTitle());
-//                intent.putExtra("TAG_ALAMAT", marker.getSnippet());
+                intent.putExtra("alamat", alamat);
                 intent.putExtra("IMAGE", marker.getSnippet());
 //                intent.putExtra("TAG_LATITUDE", Double.toString(lat));
 //                intent.putExtra("TAG_LONGITUDE", Double.toString(lng));
@@ -272,10 +270,10 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                     for (int i = 0; i < jsonArray.length(); i++) {
                         JSONObject jsonObject = jsonArray.getJSONObject(i);
                         title = jsonObject.getString(TITLE);
-                        description = jsonObject.getString(DESCRIPTION);
+                        alamat = jsonObject.getString(ALAMAT);
                         image = jsonObject.getString(IMAGE);
                         notelp = jsonObject.getString("notelp");
-                        jenis = jsonObject.getString("jenis");
+                        jenis = jsonObject.getString(JENIS);
                         latLng = new LatLng(Double.parseDouble(jsonObject.getString(LAT)), Double.parseDouble(jsonObject.getString(LNG)));
 
                         // Menambah data marker untuk di tampilkan ke google map

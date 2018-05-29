@@ -30,7 +30,7 @@ import java.util.List;
 
 public class ListActivity extends AppCompatActivity {
 
-    String notelp;
+    String notelp = "notelp";
     //this is the JSON Data URL
     //make sure you are using the correct ip else it will not work
 //    private String url = "http://warganet.ml/map/lokasi_list.php";

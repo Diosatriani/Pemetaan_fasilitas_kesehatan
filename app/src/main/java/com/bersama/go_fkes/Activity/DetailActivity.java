@@ -21,7 +21,7 @@ import com.squareup.picasso.Picasso;
 
 public class DetailActivity extends AppCompatActivity {
 
-    private TextView namatxt, alamattxt, lattxt, lngtxt, jenistxt;
+    private TextView namatxt, tv_alamtdtail, lattxt, lngtxt, jenistxt;
     private Toolbar mActionToolbar;
     private Button btn_notelp;
     private ImageView imaget;
@@ -44,6 +44,7 @@ public class DetailActivity extends AppCompatActivity {
 
         imaget = (ImageView) findViewById(R.id.imageView);
         namatxt = (TextView) findViewById(R.id.namat);
+        tv_alamtdtail = findViewById(R.id.tv_alamatdetail);
         btn_notelp = (Button) findViewById(R.id.btn_call);
         jenistxt = (TextView) findViewById(R.id.jenist);
 
@@ -59,13 +60,17 @@ public class DetailActivity extends AppCompatActivity {
 //                .load("http://192.168.1.8/map/images/foto/"+image)
                 .into(imaget);
         String nama = intent.getExtras().getString("TAG_NAMA_DEALER");
+        namatxt.setText(nama);
+        String alamat = intent.getExtras().getString("alamat");
+        tv_alamtdtail.setText(alamat);
         final String notelp = intent.getExtras().getString("notelp");
         String jenis = intent.getExtras().getString("jenis");
-
-
-        namatxt.setText(nama);
-//        alamattxt.setText(alamat);
         jenistxt.setText(jenis);
+
+
+
+
+
 //        lattxt.setText(lat);
 //        lngtxt.setText(lng);
         btn_notelp.setText(notelp);
