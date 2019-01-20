@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".Activity.DetailMarkerActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar_detail_marker"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:background="@color/colorPrimary"
+            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+            app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_gravity="center"
+                    android:layout_width="40dp"
+                    android:layout_height="55dp"
+                    android:src="@drawable/posdirp"/>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:paddingRight="40dp"
+                    android:paddingTop="8dp">
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="25dp"
+                        android:background="#c9dddddd"
+                        android:text="Posisi saya"
+                        android:paddingLeft="10dp"
+                        android:layout_gravity="center_horizontal"
+                        android:textColor="#fcfbfb" />
+
+                    <TextView
+                        android:layout_gravity="center_horizontal"
+                        android:id="@+id/tv_posisi_tujuan"
+                        android:layout_width="match_parent"
+                        android:layout_height="25dp"
+                        android:layout_marginTop="10dp"
+                        android:background="#c9dddddd"
+                        android:text="posisi tujuan"
+                        android:paddingLeft="10dp"
+                        android:textColor="#484848" />
+                </LinearLayout>
+            </LinearLayout>
+
+        </android.support.v7.widget.Toolbar>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:orientation="horizontal"
+            android:background="@color/colorPrimary"
+            android:paddingRight="30dp">
+
+        </LinearLayout>
+
+        <fragment xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/maps_detail_marker"
+            android:name="com.google.android.gms.maps.SupportMapFragment"/>
+            <!--android:name="com.google.android.gms.maps.MapFragment"/>-->
+
+
+
+
+        <TextView
+            android:id="@+id/tv_hasil_dir"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:background="#fcfbfb"
+            android:visibility="invisible"
+            android:layout_marginTop="-40dp"/>
+
+    </LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/rl_1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="70dp"
+        android:layout_alignParentTop="true">
+
+        <com.github.clans.fab.FloatingActionMenu
+            android:id="@+id/menu_down_direction"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:elevation="6dp"
+            app:menu_labels_ellipsize="end"
+            app:menu_labels_singleLine="true"
+            app:menu_fab_size="mini"
+            app:menu_icon="@drawable/ic_directions_black_24dp"
+            app:menu_colorNormal="#fcfbfb"
+            app:menu_openDirection="down">
+            <!--<com.github.clans.fab.FloatingActionButton-->
+                <!--android:id="@+id/fab_dir_car"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:src="@drawable/ic_directions_car_black_24dp"-->
+                <!--app:fab_size="mini"-->
+                <!--app:fab_colorNormal="#fcfbfb"-->
+                <!--app:fab_label="Mobil" />-->
+            <!--<com.github.clans.fab.FloatingActionButton-->
+            <!--android:id="@+id/fab_dir_bike"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:src="@drawable/ic_bike"-->
+            <!--app:fab_size="mini"-->
+            <!--app:fab_colorNormal="@color/colorWhite"-->
+            <!--app:fab_label="Menu item 1" />-->
+
+            <com.github.clans.fab.FloatingActionButton
+                android:id="@+id/fab_dir_walk"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_pin_drop"
+                app:fab_size="mini"
+                app:fab_colorNormal="#fcfbfb"
+                app:fab_label="Menuju Lokasi" />
+
+        </com.github.clans.fab.FloatingActionMenu>
+
+        <!--<com.github.clans.fab.FloatingActionMenu-->
+            <!--android:id="@+id/menu_down"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:elevation="6dp"-->
+            <!--android:layout_marginRight="150dp"-->
+            <!--android:layout_alignParentRight="true"-->
+            <!--app:menu_labels_ellipsize="end"-->
+            <!--app:menu_labels_singleLine="true"-->
+            <!--app:menu_fab_size="mini"-->
+            <!--app:menu_icon="@drawable/ic_call_black_24dp"-->
+            <!--app:menu_colorNormal="#fcfbfb"-->
+            <!--app:menu_openDirection="down">-->
+
+            <!--<com.github.clans.fab.FloatingActionButton-->
+                <!--android:id="@+id/fab_dm_phone"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:src="@drawable/ic_call_black_24dp"-->
+                <!--app:fab_size="mini"-->
+                <!--app:fab_colorNormal="#fcfbfb"-->
+                <!--app:fab_label="telepon" />-->
+
+        <!--</com.github.clans.fab.FloatingActionMenu>-->
+
+        <!--<com.github.clans.fab.FloatingActionMenu-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:elevation="6dp"-->
+            <!--android:layout_marginRight="70dp"-->
+            <!--android:layout_alignParentRight="true"-->
+            <!--app:menu_labels_ellipsize="end"-->
+            <!--app:menu_labels_singleLine="true"-->
+            <!--app:menu_fab_size="mini"-->
+            <!--app:menu_icon="@drawable/ic_account_circle_black_24dp"-->
+            <!--app:menu_colorNormal="#fcfbfb"-->
+            <!--app:menu_openDirection="down">-->
+
+            <!--<com.github.clans.fab.FloatingActionButton-->
+                <!--android:id="@+id/fab_dm_riwayat"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--app:fab_size="mini"-->
+                <!--android:src="@drawable/ic_account_circle_black_24dp"-->
+                <!--app:fab_colorNormal="#fcfbfb"-->
+                <!--app:fab_label="rekam posisi" />-->
+
+        <!--</com.github.clans.fab.FloatingActionMenu>-->
+
+        <TextView
+            android:visibility="gone"
+            android:layout_alignParentBottom="true"
+            android:layout_margin="5dp"
+            android:id="@+id/jarak"
+            android:layout_width="fill_parent"
+            android:layout_height="40dp"
+            android:ems="10"
+            android:textColor="#ff0000" />
+
+    </RelativeLayout>
+
+</RelativeLayout>

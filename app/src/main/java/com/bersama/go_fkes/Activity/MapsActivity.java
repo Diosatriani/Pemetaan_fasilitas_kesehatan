@@ -1,15 +1,21 @@
 package com.bersama.go_fkes.Activity;
 
+import android.Manifest;
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentSender;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.location.Address;
 import android.location.Geocoder;
+import android.location.Location;
+import android.os.Build;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -30,6 +36,8 @@ import com.android.volley.toolbox.StringRequest;
 import com.bersama.go_fkes.AppController.AppController;
 import com.bersama.go_fkes.MainActivity;
 import com.bersama.go_fkes.R;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -50,6 +58,8 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.List;
+import java.util.Locale;
+import java.util.Map;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -62,12 +72,22 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private String title,jenis,alamat;
     private String description;
     private String image;
+    private Marker marker;
 //    private String jenis;
     private EditText etSearch;
     private Button btnSearch;
     private GoogleMap mMap;
     private String notelp;
 //    private String alamat;
+
+    public static final String my_shared_preferences = "my_shared_preference";
+    public static final String session_status = "session_status";
+    private static final int PERMISSIONS_REQUEST = 1;
+    private GoogleApiClient googleApiClient;
+    private static final int REQUEST_CHECK_SETTINGS = 0x1;
+    private static final int ACCESS_FINE_LOCATION_INTENT_ID = 3;
+    private static final String BROADCAST_ACTION = "android.location.PROVIDERS_CHANGED";
+    private LocationRequest request;
 
     public static final String ID = "id";
     public static final String TITLE = "nama";
@@ -79,7 +99,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     String tag_json_obj = "json_obj_req";
     private Toolbar mActionToolbar;
-
+    private Location mLastLocation;
+    private LatLng latLngPosisi;
+    private String TAG;
 
 
     @Override
@@ -138,7 +160,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     public Bitmap createCustomMarker(Context context) {
 
-        View marker = ((LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.custom_marker_layout, null);
+        View marker = ((LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.custom_marker_layout_dp, null);
 
         CircleImageView markerImage = (CircleImageView) marker.findViewById(R.id.user_dp);
 //        markerImage.setImageResource(resource);
@@ -156,9 +178,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                     .resize(50,50)
                     .into(markerImage);
         }
-        catch (MalformedURLException e){
-            e.printStackTrace();
-        }
+//        catch (MalformedURLException e){
+//            e.printStackTrace();
+//        }
         catch (IOException e){
             e.printStackTrace();
         }
@@ -198,12 +220,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             return;
         }
         gMap.setMyLocationEnabled(true);
-//
-
-////         Mengarahkan ke Kabupaten Ungaran
-//        center = new LatLng(-7.1262331, 110.3963713);
-//        cameraPosition = new CameraPosition.Builder().target(center).zoom(10).build();
-//        googleMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
 
 
         getMarkers();
@@ -215,13 +231,24 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         gMap.animateCamera(cameraUpdate);
     }
 
-    private void addMarker(final LatLng latlng, final String title, final String description, final String image1) {
-        markerOptions.position(latlng);
-        markerOptions.title(title);
-        markerOptions.snippet(description);
-        markerOptions.snippet(image1);
-        markerOptions.icon(BitmapDescriptorFactory.fromBitmap(createCustomMarker(MapsActivity.this)));
-        gMap.addMarker(markerOptions);
+
+    private void addMarker(double LATITUDE, double LONGITUDE, final String title, final String description, final String notelp) {
+
+        try {
+            Geocoder geocoder = new Geocoder(this, Locale.getDefault());
+            List<Address> addresses = geocoder.getFromLocation(LATITUDE, LONGITUDE, 1);
+
+         if (addresses != null && addresses.size() > 0) {
+//             String address = addresses.get(0).getAddressLine(0); // If any additional address line present than only, check with max available address lines by getMaxAddressLineIndex()
+             LatLng latLng = new LatLng(LATITUDE, LONGITUDE);
+             MarkerOptions markerOptions = new MarkerOptions();
+             markerOptions.position(latLng);
+             markerOptions.title(title);
+             markerOptions.snippet(description);
+             markerOptions.snippet(notelp);
+             markerOptions.icon(BitmapDescriptorFactory.fromBitmap(createCustomMarker(MapsActivity.this)));
+             gMap.addMarker(markerOptions);
+
 
 //        gMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
 //            @Override
@@ -229,26 +256,30 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 //                Toast.makeText(getApplicationContext(), marker.getTitle(), Toast.LENGTH_SHORT).show();
 //            }
 //        })
-        gMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
-            @Override
-            public void onInfoWindowClick(Marker marker) {
-                Toast.makeText(getApplicationContext(), marker.getTitle(), Toast.LENGTH_SHORT).show();
+             gMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
+                 @Override
+                 public void onInfoWindowClick(Marker marker) {
+                     Toast.makeText(getApplicationContext(), marker.getTitle(), Toast.LENGTH_SHORT).show();
 
 
+                     Intent intent = new Intent(MapsActivity.this, DetailMarkerActivity.class);
+                     Double lat = marker.getPosition().latitude;
+                     Double lng = marker.getPosition().longitude;
+                     intent.putExtra("TAG_LATITUDE", Double.toString(lat));
+                     intent.putExtra("TAG_LONGITUDE", Double.toString(lng));
+                     intent.putExtra("TAG_NAMA_DEALER", marker.getTitle());
+                     intent.putExtra("alamat", alamat);
+                     intent.putExtra("notelp", notelp);
+                     startActivity(intent);
+                 }
+             });
 
+         }
+        }catch (IOException e){
+            e.printStackTrace();
+        }
+        return;
 
-                Intent intent = new Intent(MapsActivity.this, DetailActivity.class);
-//                intent.putExtra(image1, marker.getSnippet());
-                intent.putExtra("TAG_NAMA_DEALER", marker.getTitle());
-                intent.putExtra("alamat", alamat);
-                intent.putExtra("IMAGE", marker.getSnippet());
-//                intent.putExtra("TAG_LATITUDE", Double.toString(lat));
-//                intent.putExtra("TAG_LONGITUDE", Double.toString(lng));
-                intent.putExtra("jenis", jenis);
-                intent.putExtra("notelp", notelp);
-                startActivity(intent);
-            }
-        });
 
     }
 
@@ -274,10 +305,11 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                         image = jsonObject.getString(IMAGE);
                         notelp = jsonObject.getString("notelp");
                         jenis = jsonObject.getString(JENIS);
-                        latLng = new LatLng(Double.parseDouble(jsonObject.getString(LAT)), Double.parseDouble(jsonObject.getString(LNG)));
+                        latLng = new LatLng(Double.parseDouble(jsonObject.getString(LAT)),
+                                Double.parseDouble(jsonObject.getString(LNG)));
 
                         // Menambah data marker untuk di tampilkan ke google map
-                        addMarker(latLng, title, description, image);
+                        addMarker(latLng.latitude, latLng.longitude, title, description, notelp);
                     }
 
                 } catch (JSONException e) {

@@ -3,8 +3,10 @@
     package="com.bersama.go_fkes">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.CALL_PHONE" />
 
@@ -25,18 +27,21 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Splash.Splahs2Activity"/>
+        <activity android:name=".Splash.Splahs2Activity" />
         <activity android:name=".Activity.MapsActivity" />
         <activity android:name=".Activity.AboutActivity" />
         <activity android:name=".Activity.DetailActivity" />
         <activity android:name=".Activity.DetailListActivity" />
-        <activity android:name=".Helper.SplashPermissionActivity"></activity>
+        <activity android:name=".Helper.SplashPermissionActivity" />
+
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyADOfHO-dmfob_-a1OWQ5GalnmOalFRNk0" />
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
+
+        <activity android:name=".Activity.DetailMarkerActivity"></activity>
     </application>
 
 </manifest>
